@@ -8,5 +8,186 @@
     <artifactId>rezero-dynamic-summary</artifactId>
     <version>0.0.1</version>
 
+    <properties>
+        <!--===========-->
+        <!--   版本号   -->
+        <!--===========-->
+        <spring.maven.version>4.3.4.RELEASE</spring.maven.version>
+    </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>maven-clean</id>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 编译 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>copy-resource</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/target/classes</outputDirectory>
+                            <!-- 指定 Resources 资源路径，支持多个目录 -->
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 依赖 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>unpack-business</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <!-- 依赖模块不使用 jar 包进行存入，使用解压形式 -->
+                        <configuration>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 引入 javadoc 插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <show>package</show>
+                    <!-- 禁用 Java 8 的 DocLint 新特性 -->
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!--===============-->
+        <!-- Spring 依赖配置-->
+        <!--===============-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.maven.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.maven.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.maven.version}</version>
+        </dependency>
+
+        <!--==================-->
+        <!-- Aviator 表达式引擎 -->
+        <!--==================-->
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <!--=========-->
+        <!-- Alibaba -->
+        <!--=========-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.33</version>
+        </dependency>
+
+        <!--=======-->
+        <!-- slf4j -->
+        <!--=======-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+    </dependencies>
 </project>

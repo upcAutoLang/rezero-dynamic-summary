@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Properties -->
+    <bean id="relationFunctionPropertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:fileEncoding="UTF-8">
+        <property name="locations">
+            <list>
+                <value>classpath*:properties/**/*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 方法工厂 -->
+    <bean id="functionFactory" class="com.grq.rezero.function.FunctionFactory"/>
+
+    <!-- 百分比计算方法 -->
+    <bean id="percentFunction" class="com.grq.rezero.function.calculate.PercentFunction"/>
+    <!-- 关联信息 -->
+    <bean id="relationFunction" class="com.grq.rezero.function.other.RelationInfoFunction"/>
+    <!-- 字段筛选 -->
+    <bean id="fieldEqualFilterFunction"
+          class="com.grq.rezero.function.filter.FieldEqualFilterFunction"/>
+
+    <!-- 字段统计方法 -->
+    <bean id="sumByFieldFunction" class="com.grq.rezero.function.calculate.SumByFieldFunction"/>
+    <!-- 分类方法 -->
+    <bean id="classifyFilterFunction" class="com.grq.rezero.function.filter.ClassifyFilterFunction"/>
+</beans>
